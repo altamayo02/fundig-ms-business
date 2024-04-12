@@ -26,8 +26,9 @@ export default class ServiceExecutionsController {
     public async update({ params, request }: HttpContextContract) {
         const theServiceExecution: ServiceExecution = await ServiceExecution.findOrFail(params.id)
         const body = request.body()
-        // TODO - Assign attributes in body to model
-		// theServiceExecution.attr = body.attr
+		
+		theServiceExecution.started_at = body.started_at
+		theServiceExecution.ended_at = body.ended_at
         return await theServiceExecution.save()
     }
 
