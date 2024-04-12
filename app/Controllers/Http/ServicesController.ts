@@ -1,39 +1,39 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Message from 'App/Models/Message'
+import Service from 'App/Models/Service'
 
-export default class MessagesController {
+export default class ServicesController {
 	public async find({ request, params }: HttpContextContract) {
         if (params.id) {
-            return await Message.findOrFail(params.id)
+            return await Service.findOrFail(params.id)
         } else {
             const data = request.all()
             if ('page' in data && 'per_page' in data) {
                 const page = request.input('page', 1)
                 const perPage = request.input('per_page', 20)
-                return await Message.query().paginate(page, perPage)
+                return await Service.query().paginate(page, perPage)
             } else {
-                return await Message.query()
+                return await Service.query()
             }
         }
     }
 
     public async create({ request }: HttpContextContract) {
         const body = request.body()
-        const theMessage: Message = await Message.create(body)
-        return theMessage
+        const theService: Service = await Service.create(body)
+        return theService
     }
 
     public async update({ params, request }: HttpContextContract) {
-        const theMessage: Message = await Message.findOrFail(params.id)
+        const theService: Service = await Service.findOrFail(params.id)
         const body = request.body()
 		// TODO - Assign attributes in body to model
-		// theMessage.attr = body.attr
-        return await theMessage.save()
+		// theService.attr = body.attr
+        return await theService.save()
     }
 
     public async delete({ params, response }: HttpContextContract) {
-        const theMessage: Message = await Message.findOrFail(params.id)
+        const theService: Service = await Service.findOrFail(params.id)
         response.status(204)
-        return await theMessage.delete()
+        return await theService.delete()
     }
 }
