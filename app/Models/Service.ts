@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class ServiceExecution extends BaseModel {
+export default class Service extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -10,8 +10,4 @@ export default class ServiceExecution extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-  
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public Date: DateTime
-  
 }

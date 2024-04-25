@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'service_executions'
+  protected tableName = 'services'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
@@ -12,13 +12,8 @@ export default class extends BaseSchema {
        */
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
-      table.integer('service_id').unsigned().references('id').inTable('services').onDelete('CASCADE')
-      table.string('pickupCity')
-      table.string('pickupAddress')
-      table.date('Date')
-      table.string('timeStrat')
-      table.string('timeEnd')
-      table.boolean('closed')
+      String.description('description')
+      table.integer('cost')
     })
   }
 
