@@ -29,7 +29,6 @@ export default class Client extends BaseModel {
   @column()
   public deceased: boolean
 
-  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
