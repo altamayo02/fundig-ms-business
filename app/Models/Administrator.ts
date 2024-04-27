@@ -1,25 +1,32 @@
 import { DateTime } from 'luxon'
-import { BaseModel, HasMany, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
-import Administrator from './Administrator'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import House from './House'
 
-export default class House extends BaseModel {
+export default class Administrator extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-  
+
+  // MongoDB reference pulled from MS-Security
+  @column()
+  public user_id: string
+
+  @column()
+  public cc: string
+
   @column()
   public department: string
-  
+
   @column()
   public city: string
-  
+
   @column()
   public address: string
-  
+
   @column()
   public phone_number: number
 
   @column()
-  public is_main_house: boolean
+  public responsibility_descr: string
 
 
   @column.dateTime({ autoCreate: true })
@@ -28,8 +35,9 @@ export default class House extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Administrator, {
+
+  @belongsTo(() => House, {
 	foreignKey: 'house_id'
   })
-  public administrators: HasMany<typeof Administrator>
+  public house: BelongsTo<typeof House>
 }
