@@ -8,8 +8,6 @@ export default class Message extends BaseModel {
   @column()
   public content:string
 
-  @
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

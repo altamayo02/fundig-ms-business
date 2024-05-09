@@ -26,11 +26,10 @@ export default class RoomsController {
     public async update({ params, request }: HttpContextContract) {
         const theRoom: Room = await Room.findOrFail(params.id)
         const body = request.body()
-		// TODO - Assign attributes in body to model
-		// theRoom.attr = body.attr
+        // TODO - Assign attributes in body to model
+        // theRoom.attr = body.attr
         return await theRoom.save()
     }
-
     public async delete({ params, response }: HttpContextContract) {
         const theRoom: Room = await Room.findOrFail(params.id)
         response.status(204)
