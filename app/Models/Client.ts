@@ -29,6 +29,12 @@ export default class Client extends BaseModel {
   @column()
   public deceased: boolean
 
+  @column()
+  public titular_id: number
+
+  @column()
+  public subscription_id: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

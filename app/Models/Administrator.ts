@@ -28,6 +28,9 @@ export default class Administrator extends BaseModel {
   @column()
   public responsibility_descr: string
 
+  @column()
+  public house_id: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

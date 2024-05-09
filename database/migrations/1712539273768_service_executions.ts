@@ -12,7 +12,7 @@ export default class extends BaseSchema {
     table.string('city')
     table.string('pickupAddress')
     table.string('pickupCity')
-    table.string('rooms_id').references('rooms.id') //Referencia a la habitación
+    table.integer('rooms_id').references('rooms.id') //Referencia a la habitación
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
