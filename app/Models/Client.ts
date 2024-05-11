@@ -1,40 +1,12 @@
-import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, HasMany, ManyToMany, belongsTo, column, hasMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BelongsTo, HasMany, ManyToMany, belongsTo, column, hasMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Service from './Service'
 import Plan from './Plan'
+import User from './User'
 
-export default class Client extends BaseModel {
-  @column({ isPrimary: true })
-  public id: number
-
-  // MongoDB reference pulled from MS-Security
-  @column()
-  public user_id: string
-
-  @column()
-  public cc: string
-
-  @column()
-  public department: string
-
-  @column()
-  public city: string
-
-  @column()
-  public address: string
-
-  @column()
-  public phone_number: number
-
+export default class Client extends User {
   @column()
   public deceased: boolean
 
-  
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
 
   @hasMany(() => Client, {
 	foreignKey: 'client_id'
