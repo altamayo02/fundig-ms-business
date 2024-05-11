@@ -5,6 +5,15 @@ export default class Room extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public name: string
+
+  @column()
+  public house_id: number
+
+  @column()
+  public price: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

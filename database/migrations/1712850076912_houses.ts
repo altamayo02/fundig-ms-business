@@ -1,3 +1,4 @@
+
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
@@ -11,7 +12,6 @@ export default class extends BaseSchema {
 	  table.string('address')
 	  table.integer('phone_number')
 	  table.boolean('is_main_house')
-	  // ? - hasMany Service
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

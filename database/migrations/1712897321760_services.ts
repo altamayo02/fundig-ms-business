@@ -6,6 +6,10 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
+      table.string('name') // name of the service
+      table.boolean('status') // status of the service
+      table.double('cost')//cost of the service
+      
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
