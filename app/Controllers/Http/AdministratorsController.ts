@@ -33,7 +33,7 @@ export default class AdministratorsController {
 		theAdministrator.city = body.city
 		theAdministrator.address = body.address
 		theAdministrator.phone_number = body.phone_number
-		theAdministrator.responsibility_descr = body.responsibility_descr
+		theAdministrator.responsibilities = body.responsibility_descr
         return await theAdministrator.save()
     }
 
