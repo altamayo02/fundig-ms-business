@@ -5,4 +5,4 @@ Route.group(() => {
 	Route.post('/reviews', 'ReviewsController.create')
 	Route.put('/reviews/:id', 'ReviewsController.update')
 	Route.delete('/reviews/:id', 'ReviewsController.delete')
-})
+}).middleware(['security'])
