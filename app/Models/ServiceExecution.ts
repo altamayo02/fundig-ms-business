@@ -1,27 +1,46 @@
 import { DateTime } from 'luxon'
-import { BaseModel, HasMany, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
-import Review from './Review'
+import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import Room from 'App/Models/Room'
+import Client from 'App/Models/Client'
+import Service from 'App/Models/Service'
 
 export default class ServiceExecution extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column()
-  public started_at: DateTime
+  @column.dateTime()
+  public startedAt: DateTime
+
+  @column.dateTime()
+  public endedAt: DateTime
 
   @column()
-  public ended_at: DateTime
+  public pickupCity: string
 
-  
+  @column()
+  public pickupAddress: string
+
+  @column()
+  public roomId: number
+
+  @column()
+  public clientId: number
+
+  @column()
+  public serviceId: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  @belongsTo(() => Room)
+  public room: BelongsTo<typeof Room>
 
-  @hasMany(() => Review, {
-	foreignKey: 'service_execution_id'
-  })
-  public reviews: HasMany<typeof Review>
+  @belongsTo(() => Client)
+  public client: BelongsTo<typeof Client>
+
+  @belongsTo(() => Service)
+  public service: BelongsTo<typeof Service>
 }

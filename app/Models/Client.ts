@@ -1,34 +1,47 @@
-import { BelongsTo, HasMany, ManyToMany, belongsTo, column, hasMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
-import Service from './Service'
-import Plan from './Plan'
-import User from './User'
+// app/Models/Client.ts
 
-export default class Client extends User {
+import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import ServiceExecution from './ServiceExecution'
+import Subscription from './Subscription'
+import { DateTime } from 'luxon'
+
+export default class Client extends BaseModel {
+  @column({ isPrimary: true })
+  public id: number
+
+  @column()
+  public userId: number
+
+  @column()
+  public cc: string
+
+  @column()
+  public department: string
+
+  @column()
+  public city: string
+
+  @column()
+  public address: string
+
+  @column()
+  public phoneNumber: number
+
   @column()
   public deceased: boolean
 
+  @column()
+  public holderId: number // ID del titular
 
-  @hasMany(() => Client, {
-	foreignKey: 'beneficiary_id'
-  })
-  public clients: HasMany<typeof Client>
+  @hasMany(() => ServiceExecution)
+  public serviceExecutions: HasMany<typeof ServiceExecution>
 
-  @belongsTo(() => Client, {
-	foreignKey: 'holder_id',
-  })
-  public client: BelongsTo<typeof Client>
+  @hasMany(() => Subscription)
+  public subscriptions: HasMany<typeof Subscription>
 
-  @manyToMany(() => Service, {
-	pivotTable: 'service_executions',
-	pivotForeignKey: 'client_id',
-	pivotRelatedForeignKey: 'service_id'
-  })
-  public services: ManyToMany<typeof Service>
-  
-  @manyToMany(() => Plan, {
-	pivotTable: 'subscriptions',
-	pivotForeignKey: 'client_id',
-	pivotRelatedForeignKey: 'plan_id'
-  })
-  public plans: ManyToMany<typeof Plan>
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime
 }
