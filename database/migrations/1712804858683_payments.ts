@@ -12,7 +12,7 @@ export default class extends BaseSchema {
       table.dateTime('dateTime') //Fecha y hora
       table.integer('EpaycoAdditionalInfo') //Información adicional de epayco
       table.string('method') //Metodo usado
-      table.integer('subscriptions_id').references('id').inTable('subscriptions').onDelete('RESTRICT') //Referenci a la suscripción
+      table.integer('subscriptions_id').references('id').inTable('subscriptions').onDelete('RESTRICT') //Referencia a la suscripción
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

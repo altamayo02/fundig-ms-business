@@ -26,7 +26,7 @@ export default class Security {
           },
         }
       )
-      if (result.data) {
+      if (result.data.success) {
         await next()
       } else {
         return response.status(401)

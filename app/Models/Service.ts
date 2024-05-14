@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, ManyToMany, column, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Service extends BaseModel {
   @column({ isPrimary: true })

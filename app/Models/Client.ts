@@ -9,12 +9,12 @@ export default class Client extends User {
 
 
   @hasMany(() => Client, {
-	foreignKey: 'client_id'
+	foreignKey: 'beneficiary_id'
   })
   public clients: HasMany<typeof Client>
 
   @belongsTo(() => Client, {
-	foreignKey: 'client_id'
+	foreignKey: 'holder_id',
   })
   public client: BelongsTo<typeof Client>
 

@@ -23,7 +23,7 @@ export default class User extends BaseModel {
   public address: string
 
   @column()
-  public phone_number: number
+  public phone_number: string
   
 
   @column.dateTime({ autoCreate: true })

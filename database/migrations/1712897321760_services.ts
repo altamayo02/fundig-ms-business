@@ -7,6 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('name') // name of the service
+      table.string('description') // description of the service
       table.boolean('status') // status of the service
       table.double('cost')//cost of the service
       
