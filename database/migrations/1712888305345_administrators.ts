@@ -12,7 +12,7 @@ export default class extends BaseSchema {
 	  table.string('city')
 	  table.string('address')
 	  table.integer('phone_number')
-	  table.string('responsibility_descr')
+	  table.string('responsibilities')
 	  table.string('house_id').references('houses.id')
 
       table.timestamp('created_at', { useTz: true })

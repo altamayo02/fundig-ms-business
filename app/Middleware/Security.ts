@@ -18,7 +18,7 @@ export default class Security {
     }
     try {
       const result = await axios.post(
-        `${Env.get('MS_SECURITY')}/api/public/security/validate-permissions`,
+        `${Env.get('URL_SECURITY')}/api/public/security/validate-permissions`,
         thePermission,
         {
           headers: {
