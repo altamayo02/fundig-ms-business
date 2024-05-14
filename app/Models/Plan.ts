@@ -23,7 +23,7 @@ export default class Plan extends BaseModel {
   public type: number
 
   @column()
-  public amoiunBeneficiares: number
+  public amountBeneficiares: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

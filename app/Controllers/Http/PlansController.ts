@@ -37,3 +37,5 @@ export default class PlansController {
         return await thePlan.delete()
     }
 }
+
+
