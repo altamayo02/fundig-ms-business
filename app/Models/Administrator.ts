@@ -9,7 +9,7 @@ export default class Administrator extends BaseModel {
   public id: number
 
   @column()
-  public userId: number
+  public securityId: number
 
   @column()
   public cc: string

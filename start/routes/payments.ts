@@ -1,8 +1,8 @@
 import Route from '@ioc:Adonis/Core/Route'
 Route.group(() => {
-	Route.get('/payments', 'PaymentsController.find')
-	Route.get('/payments/:id', 'PaymentsController.find')
-	Route.post('/payments', 'PaymentsController.create')
-	Route.put('/payments/:id', 'PaymentsController.update')
-	Route.delete('/payments/:id', 'PaymentsController.delete')
+	Route.get('api/payments', 'PaymentsController.find')
+	Route.get('api/payments/:id', 'PaymentsController.find')
+	Route.post('api/payments', 'PaymentsController.create')
+	Route.put('api/payments/:id', 'PaymentsController.update')
+	Route.delete('api/payments/:id', 'PaymentsController.delete')
 }).middleware(['security'])

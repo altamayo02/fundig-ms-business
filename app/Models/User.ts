@@ -8,7 +8,7 @@ export default class User extends BaseModel {
 
   // MongoDB reference pulled from MS-Security
   @column()
-  public user_id: string
+  public securityId: string
 
   @column()
   public cc: string
@@ -23,7 +23,7 @@ export default class User extends BaseModel {
   public address: string
 
   @column()
-  public phone_number: string
+  public phoneNumber: string
   
 
   @column.dateTime({ autoCreate: true })
