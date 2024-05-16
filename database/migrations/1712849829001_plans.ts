@@ -11,7 +11,7 @@ export default class extends BaseSchema {
       table.boolean('status') // status of the plan
       table.double('cost')//cost of the plan
       table.integer('type')//type of the plan
-      table.integer('amoiunBeneficiares')//amount of beneficiaries
+      table.integer('amountBeneficiares')//amount of beneficiaries
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
