@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, BelongsTo, manyToMany, ManyToMany, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Room from 'App/Models/Room'
-import Client from 'App/Models/Client'
-import Service from 'App/Models/Service'
+import Camera from './Camera'
+import Client from './Client'
+import { hasOne } from '@ioc:Adonis/Lucid/Orm'
 
 export default class ServiceExecution extends BaseModel {
   @column({ isPrimary: true })
@@ -14,20 +15,6 @@ export default class ServiceExecution extends BaseModel {
   @column.dateTime()
   public endedAt: DateTime
 
-  @column()
-  public pickupCity: string
-
-  @column()
-  public pickupAddress: string
-
-  @column()
-  public roomId: number
-
-  @column()
-  public clientId: number
-
-  @column()
-  public serviceId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -35,12 +22,19 @@ export default class ServiceExecution extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  
   @belongsTo(() => Room)
   public room: BelongsTo<typeof Room>
 
-  @belongsTo(() => Client)
-  public client: BelongsTo<typeof Client>
+  @manyToMany(() => Camera, {
+    pivotTable: 'transmissions',
+    pivotForeignKey: 'service_execution_id',
+    pivotRelatedForeignKey: 'camera_id'
+  })
+  public cameras: ManyToMany<typeof Camera>
 
-  @belongsTo(() => Service)
-  public service: BelongsTo<typeof Service>
+  @hasOne(() => Client, {
+    foreignKey: 'client_id'
+  })
+  public client: HasOne<typeof Client>
 }
