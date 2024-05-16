@@ -27,12 +27,12 @@ export default class ClientsController {
         const theClient: Client = await Client.findOrFail(params.id)
         const body = request.body()
 		
-		theClient.user_id = body.user_id
+		theClient.userId = body.user_id
 		theClient.cc = body.cc
 		theClient.department = body.department
 		theClient.city = body.city
 		theClient.address = body.address
-		theClient.phone_number = body.phone_number
+		theClient.phoneNumber = body.phone_number
 		theClient.deceased = body.deceased
         return await theClient.save()
     }

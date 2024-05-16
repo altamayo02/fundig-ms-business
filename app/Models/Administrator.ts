@@ -29,7 +29,9 @@ export default class Administrator extends BaseModel {
   @column()
   public responsibilities: string
 
-  @belongsTo(() => House)
+  @belongsTo(() => House, {
+    foreignKey:'houseId'
+  })
   public house: BelongsTo<typeof House>
 
   @column()

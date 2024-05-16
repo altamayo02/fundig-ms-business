@@ -1,9 +1,10 @@
 // app/Models/Client.ts
 
-import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import ServiceExecution from './ServiceExecution'
 import Subscription from './Subscription'
 import { DateTime } from 'luxon'
+import User from './User'
 
 export default class Client extends BaseModel {
   @column({ isPrimary: true })
@@ -44,4 +45,11 @@ export default class Client extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => User, {
+    foreignKey: 'userId',
+  })
+  public user: BelongsTo<typeof User>
+  
+  
 }

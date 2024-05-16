@@ -28,8 +28,6 @@ export default class House extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Administrator, {
-	foreignKey: 'house_id'
-  })
+  @hasMany(() => Administrator)
   public administrators: HasMany<typeof Administrator>
 }
