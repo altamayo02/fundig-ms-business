@@ -16,7 +16,7 @@ export default class extends BaseSchema {
 		table.boolean('deceased') //fallecido
 		table.string('holder_id').references('clients.id') //Referencia al titular
 		//se hace referencia a la clave primaria de la tabla usuarios
-		table.integer('id_usuario').unsigned().references('usuarios.id').onDelete('CASCADE') // eliminar el token si el usuario es eliminado
+		table.integer('userId').unsigned().references('users.id').onDelete('CASCADE') // eliminar el token si el usuario es eliminado
 
 		
 		table.timestamp('created_at', { useTz: true })

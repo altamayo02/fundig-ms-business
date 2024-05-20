@@ -29,10 +29,14 @@ export default class Subscription extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Client)
+  @belongsTo(() => Client, {
+    foreignKey: 'clientId'
+  })
   public client: BelongsTo<typeof Client>
 
-  @belongsTo(() => Plan)
+  @belongsTo(() => Plan, {
+    foreignKey: 'planId'
+  })
   public plan: BelongsTo<typeof Plan>
 
   @hasMany(() => Payment, {

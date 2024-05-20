@@ -9,10 +9,10 @@ export default class Administrator extends BaseModel {
   public id: number
 
   @column()
-  public securityId: number
+  public securityId: string
 
   @column()
-  public cc: string
+  public cc: number
 
   @column()
   public department: string
@@ -29,7 +29,9 @@ export default class Administrator extends BaseModel {
   @column()
   public responsibilities: string
 
-  @belongsTo(() => House)
+  @belongsTo(() => House, {
+    foreignKey:'houseId'
+  })
   public house: BelongsTo<typeof House>
 
   @column()

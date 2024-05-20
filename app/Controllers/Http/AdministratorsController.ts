@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Administrator from 'App/Models/Administrator'
+import AdministratorValidator from 'App/Validators/AdministratorValidator'
 
 export default class AdministratorsController {
 	public async find({ request, params }: HttpContextContract) {
@@ -17,25 +18,41 @@ export default class AdministratorsController {
         }
     }
 
-    public async create({ request }: HttpContextContract) {
-        const body = request.body()
-        const theAdministrator: Administrator = await Administrator.create(body)
-        return theAdministrator
+    public async create({ request, response }: HttpContextContract) {
+        try {
+            const validatedData = await request.validate(AdministratorValidator)
+            const theAdministrator: Administrator = await Administrator.create(validatedData)
+            return response.status(201).json({theAdministrator})
+        } catch (error) {
+            if(error.messages){
+                return response.status(422).json({errors:error.messages})
+            }
+
+            return response.status(500).json({errors:error})
+        }
+
     }
 
-    public async update({ params, request }: HttpContextContract) {
-        const theAdministrator: Administrator = await Administrator.findOrFail(params.id)
-        const body = request.body()
-		
-		theAdministrator.user_id = body.user_id
-		theAdministrator.cc = body.cc
-		theAdministrator.department = body.department
-		theAdministrator.city = body.city
-		theAdministrator.address = body.address
-		theAdministrator.phone_number = body.phone_number
-		theAdministrator.responsibilities = body.responsibilities
-        return await theAdministrator.save()
+    public async update({ params, request, response }: HttpContextContract) {
+        try {
+          const validatedData = await request.validate(AdministratorValidator)
+    
+          const theAdministrator = await Administrator.findOrFail(params.id)
+    
+          // Actualizar solo los campos que han sido proporcionados en la solicitud
+          theAdministrator.merge(validatedData)
+    
+          await theAdministrator.save()
+    
+          return response.status(200).json(theAdministrator)
+        } catch (error) {
+          if (error.messages) {
+            return response.status(422).json({ errors: error.messages })
+          }
+          return response.status(500).json({ error: 'Something went wrong' })
+        }
     }
+    
 
     public async delete({ params, response }: HttpContextContract) {
         const theAdministrator: Administrator = await Administrator.findOrFail(params.id)

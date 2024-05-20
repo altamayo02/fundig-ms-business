@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Env from '@ioc:Adonis/Core/Env'
 import axios, { HttpStatusCode } from 'axios'
 import Client from 'App/Models/Client'
+import ClientValidator from 'App/Validators/ClientValidator'
 
 export default class ClientsController {
 	public async find({ request, params }: HttpContextContract) {
@@ -20,7 +21,7 @@ export default class ClientsController {
     }
 
     public async create({ request, response }: HttpContextContract) {
-        const body = request.body()
+        /* const body = request.body()
 		if (
 			body.name &&
 			body.email &&
@@ -47,10 +48,22 @@ export default class ClientsController {
 			response.status(result.status)
 			return
 		}
-		response.status(HttpStatusCode.BadRequest)
+		response.status(HttpStatusCode.BadRequest) */
+
+        try {
+            const validatedData = await request.validate(ClientValidator)
+            const theClient: Client = await Client.create(validatedData)
+            return response.status(201).json({theClient})
+        } catch (error) {
+            if(error.messages){
+                return response.status(422).json({errors:error.messages})
+            }
+
+            return response.status(500).json({errors:error})
+        }
     }
 
-    public async update({ params, request }: HttpContextContract) {
+    /* public async update({ params, request }: HttpContextContract) {
         const theClient: Client = await Client.findOrFail(params.id)
         const body = request.body()
 		
@@ -62,6 +75,26 @@ export default class ClientsController {
 		theClient.phoneNumber = body.phone_number
 		theClient.deceased = body.deceased
         return await theClient.save()
+    } */
+
+    public async update({ params, request, response }: HttpContextContract) {
+        try {
+          const validatedData = await request.validate(ClientValidator)
+    
+          const theClient = await Client.findOrFail(params.id)
+    
+          // Actualizar solo los campos que han sido proporcionados en la solicitud
+          theClient.merge(validatedData)
+    
+          await theClient.save()
+    
+          return response.status(200).json(theClient)
+        } catch (error) {
+          if (error.messages) {
+            return response.status(422).json({ errors: error.messages })
+          }
+          return response.status(500).json({ error: 'Something went wrong' })
+        }
     }
 
     public async delete({ params, response }: HttpContextContract) {

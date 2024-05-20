@@ -1,12 +1,35 @@
 // app/Models/Client.ts
 
-import { BelongsTo, belongsTo, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import ServiceExecution from './ServiceExecution'
+import Subscription from './Subscription'
 import { DateTime } from 'luxon'
 import User from './User'
 import Service from './Service'
 import Plan from './Plan'
 
-export default class Client extends User {
+export default class Client extends BaseModel {
+  @column({ isPrimary: true })
+  public id: number
+
+  @column()
+  public securityId: string
+
+  @column()
+  public cc: number
+
+  @column()
+  public department: string
+
+  @column()
+  public city: string
+
+  @column()
+  public address: string
+
+  @column()
+  public phoneNumber: number
+
   @column()
   public deceased: boolean
 
@@ -42,4 +65,11 @@ export default class Client extends User {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => User, {
+    foreignKey: 'userId',
+  })
+  public user: BelongsTo<typeof User>
+  
+  
 }
