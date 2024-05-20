@@ -20,12 +20,12 @@ export default class PlanService extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => Plan, {
-    foreignKey: 'planId',
+    foreignKey: 'plan_id',
   })
   public plan: BelongsTo<typeof Plan>
 
   @belongsTo(() => Subscription, {
-    foreignKey: 'subscriptionId',
+    foreignKey: 'subscription_id',
   })
   public subscription: BelongsTo<typeof Subscription>
 }

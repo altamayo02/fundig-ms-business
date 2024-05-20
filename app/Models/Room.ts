@@ -23,12 +23,12 @@ export default class Room extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => House, {
-    foreignKey: 'houseId',
+    foreignKey: 'house_id',
   })
   public house: BelongsTo<typeof House>
 
   @hasMany(() => ServiceExecution, {
-    foreignKey: 'roomId',
+    foreignKey: 'room_id',
   })
   public serviceExecutions: HasMany<typeof ServiceExecution>
 }

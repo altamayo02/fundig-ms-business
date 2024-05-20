@@ -34,7 +34,7 @@ export default class Payment extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => Subscription, {
-    foreignKey: 'subscriptionsId',
+    foreignKey: 'subscriptions_id',
   })
   public subscription: BelongsTo<typeof Subscription>
 }

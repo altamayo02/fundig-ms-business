@@ -30,7 +30,7 @@ export default class Administrator extends BaseModel {
   public responsibilities: string
 
   @belongsTo(() => House, {
-    foreignKey:'houseId'
+    foreignKey:'house_id'
   })
   public house: BelongsTo<typeof House>
 

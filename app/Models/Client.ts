@@ -67,7 +67,7 @@ export default class Client extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => User, {
-    foreignKey: 'userId',
+    foreignKey: 'user_id',
   })
   public user: BelongsTo<typeof User>
   

@@ -30,17 +30,17 @@ export default class Subscription extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => Client, {
-    foreignKey: 'clientId'
+    foreignKey: 'client_id'
   })
   public client: BelongsTo<typeof Client>
 
   @belongsTo(() => Plan, {
-    foreignKey: 'planId'
+    foreignKey: 'plan_id'
   })
   public plan: BelongsTo<typeof Plan>
 
   @hasMany(() => Payment, {
-    foreignKey: 'subscriptionId',
+    foreignKey: 'subscription_id',
   })
   public payments: HasMany<typeof Payment>
 }

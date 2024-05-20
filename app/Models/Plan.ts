@@ -32,12 +32,12 @@ export default class Plan extends BaseModel {
   public updatedAt: DateTime
 
   @hasMany(() => Subscription, {
-    foreignKey: 'planId',
+    foreignKey: 'plan_id',
   })
   public subscriptions: HasMany<typeof Subscription>
 
   @hasMany(() => PlanService, {
-    foreignKey: 'planId',
+    foreignKey: 'plan_id',
   })
   public planServices: HasMany<typeof PlanService>
 }

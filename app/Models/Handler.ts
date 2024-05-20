@@ -31,7 +31,7 @@ export default class Handler extends BaseModel{
     public houseId: number
     
     @belongsTo(() => House, {
-        foreignKey:'houseId'
+        foreignKey:'house_id'
       })
       public house: BelongsTo<typeof House>
 }
