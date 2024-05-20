@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Handler from 'App/Models/Handler'
+import HandlerValidator from 'App/Validators/HandlerValidator'
 
 export default class HandlersController {
 	public async find({ request, params }: HttpContextContract) {
@@ -17,23 +18,39 @@ export default class HandlersController {
         }
     }
 
-    public async create({ request }: HttpContextContract) {
-        const body = request.body()
-        const theHandler: Handler = await Handler.create(body)
-        return theHandler
+    public async create({ request, response }: HttpContextContract) {
+        try {
+            const validatedData = await request.validate(HandlerValidator)
+            const theHandler: Handler = await Handler.create(validatedData)
+            return response.status(201).json({theHandler})
+        } catch (error) {
+            if(error.messages){
+                return response.status(422).json({errors:error.messages})
+            }
+
+            return response.status(500).json({errors:error})
+        }
+
     }
 
-    public async update({ params, request }: HttpContextContract) {
-        const theHandler: Handler = await Handler.findOrFail(params.id)
-        const body = request.body()
-		
-		theHandler.user_id = body.user_id
-		theHandler.cc = body.cc
-		theHandler.department = body.department
-		theHandler.city = body.city
-		theHandler.address = body.address
-		theHandler.phone_number = body.phone_number
-        return await theHandler.save()
+    public async update({ params, request, response }: HttpContextContract) {
+        try {
+          const validatedData = await request.validate(HandlerValidator)
+    
+          const theHandler = await Handler.findOrFail(params.id)
+    
+          // Actualizar solo los campos que han sido proporcionados en la solicitud
+          theHandler.merge(validatedData)
+    
+          await theHandler.save()
+    
+          return response.status(200).json(theHandler)
+        } catch (error) {
+          if (error.messages) {
+            return response.status(422).json({ errors: error.messages })
+          }
+          return response.status(500).json({ error: 'Something went wrong' })
+        }
     }
 
     public async delete({ params, response }: HttpContextContract) {

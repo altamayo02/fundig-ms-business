@@ -11,10 +11,10 @@ export default class Client extends BaseModel {
   public id: number
 
   @column()
-  public userId: number
+  public userId: string
 
   @column()
-  public cc: string
+  public cc: number
 
   @column()
   public department: string

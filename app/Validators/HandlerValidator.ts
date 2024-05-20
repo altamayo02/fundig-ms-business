@@ -10,9 +10,9 @@ export default class AdministratorValidator {
       rules.required()
     ]), // At least two letters
 
-    userId: schema.string([ 
+    userId: schema.string([
       rules.exists({ table: 'users', column: 'id' }),  
-      rules.required() 
+      rules.required()
     ]), // Ensure id exists and is provided
 
     lastName: schema.string([
@@ -25,21 +25,37 @@ export default class AdministratorValidator {
       rules.required(),
     ]), // Must contain @, letters, a dot, and letters
 
-    //TODO: Validate cities
     city: schema.string([
       rules.required(),
     ]),
 
     address: schema.string([
       rules.required(),
-      rules.regex(/^[a-zA-Z0-9]+$/)
-    ]), // Must contain letters and numbers
+      rules.regex(/^[a-zA-Z0-9\s,.-]+$/) // Adjusted regex to include spaces, commas, periods, and hyphens
+    ]), // Must contain letters, numbers, spaces, and common punctuation
 
     cc: schema.number([
       rules.required(),
-      rules.minLength(5)
+    ]),
+
+    phoneNumber: schema.number([
+      rules.required
     ])
+    
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    'name.minLength': 'At least two letters',
+    'name.required': 'Name is required',
+    'userId.exists': 'User ID must exist',
+    'userId.required': 'User ID is required',
+    'lastName.minLength': 'At least 2 letters',
+    'lastName.required': 'Last name is required',
+    'email.regex': 'Email must be a valid email address',
+    'email.required': 'Email is required',
+    'city.required': 'City is required',
+    'address.regex': 'Address must contain letters, numbers, and common punctuation',
+    'address.required': 'Address is required',
+    'cc.required': 'Credit card number is required'
+}
 }
