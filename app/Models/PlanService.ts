@@ -8,10 +8,10 @@ export default class PlanService extends BaseModel {
   public id: number
 
   @column()
-  public planId: number
+  public plan_id: number
 
   @column()
-  public subscriptionId: number
+  public subscription_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -17,6 +17,7 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
     }).alterTable('subscriptions', (table) => {
       table.integer('plan_id').references('id').inTable('plans').unsigned() //Referencia al plan
+      table.integer('client_id').references('id').inTable('clients').unsigned() //Referencia al client
       })
   }
 

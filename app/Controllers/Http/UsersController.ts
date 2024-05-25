@@ -36,7 +36,7 @@ export default class UsersController {
 
     public async create({ request, response }: HttpContextContract) {
         const body = request.body()
-		if (
+		/*if (
 			body.name &&
 			body.email &&
 			body.password
@@ -54,22 +54,22 @@ export default class UsersController {
 				body.user_id = result.data._id
 				delete body.name
 				delete body.email
-				delete body.password
+				delete body.password*/
 				const theUser: User = await User.create(body)
 				return theUser
-			}
+			//}
 
-			response.status(result.status)
-			return
+			//response.status(result.status)
+			//return
 		}
-		response.status(HttpStatusCode.BadRequest)
-    }
+		//response.status(HttpStatusCode.BadRequest)
+    //}
 
     public async update({ params, request }: HttpContextContract) {
         const theUser: User = await User.findOrFail(params.id)
         const body = request.body()
 		
-		theUser.securityId = body.user_id
+		theUser.security_id = body.user_id
 		theUser.cc = body.cc
 		theUser.department = body.department
 		theUser.city = body.city

@@ -18,10 +18,10 @@ export default class Subscription extends BaseModel {
   public paymentFrequency: number
 
   @column()
-  public planId: number
+  public plan_id: number
 
   @column()
-  public clientId: number
+  public client_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -40,7 +40,7 @@ export default class Subscription extends BaseModel {
   public plan: BelongsTo<typeof Plan>
 
   @hasMany(() => Payment, {
-    foreignKey: 'subscription_id',
+    foreignKey: 'payment_id',
   })
   public payments: HasMany<typeof Payment>
 }

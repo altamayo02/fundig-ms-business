@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('currency') //Moneda del pago
       table.string('status') //Estado de epayco
       table.dateTime('dateTime') //Fecha y hora
-      table.integer('EpaycoAdditionalInfo') //Información adicional de epayco
+      table.integer('epaycoAdditionalInfo') //Información adicional de epayco
       table.string('method') //Metodo usado
 
       /**

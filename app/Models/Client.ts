@@ -13,7 +13,7 @@ export default class Client extends BaseModel {
   public id: number
 
   @column()
-  public securityId: string
+  public user_id: number
 
   @column()
   public cc: number
@@ -32,6 +32,9 @@ export default class Client extends BaseModel {
 
   @column()
   public deceased: boolean
+
+  @column()
+  public holder_id: boolean
 
 
   @hasMany(() => Client, {

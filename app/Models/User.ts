@@ -8,7 +8,7 @@ export default class User extends BaseModel {
 
   // MongoDB reference pulled from MS-Security
   @column()
-  public securityId: string
+  public security_id: string
 
   @column()
   public cc: string

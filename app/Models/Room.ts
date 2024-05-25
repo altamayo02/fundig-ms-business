@@ -11,7 +11,11 @@ export default class Room extends BaseModel {
   public name: string
 
   @column()
-  public houseId: number
+  public house_id: number
+
+  
+  @column()
+  public room_id: number
 
   @column()
   public price: number

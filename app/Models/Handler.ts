@@ -1,5 +1,6 @@
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import House from './House'
+import User from './User'
 
 export default class Handler extends BaseModel{
 
@@ -7,7 +8,7 @@ export default class Handler extends BaseModel{
     public id: number
   
     @column()
-    public userId: string
+    public user_id: string
   
     @column()
     public cc: number
@@ -28,10 +29,15 @@ export default class Handler extends BaseModel{
     public deceased: boolean
 
     @column()
-    public houseId: number
+    public house_id: number
     
     @belongsTo(() => House, {
         foreignKey:'house_id'
       })
       public house: BelongsTo<typeof House>
+
+      @belongsTo(() => User, {
+        foreignKey:'user_id'
+      })
+      public user: BelongsTo<typeof User>
 }

@@ -5,30 +5,27 @@ import Camera from './Camera'
 import Client from './Client'
 import { hasOne } from '@ioc:Adonis/Lucid/Orm'
 import Service from './Service'
-import Stream from './Stream'
+import Execution from './Execution'
 
 export default class ServiceExecution extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @column()
+public execution_id: number
+
+@column()
+public room_id: number
+
+@column()
+public service_id: number
+
 
   @column.dateTime()
   public startedAt: DateTime
 
   @column.dateTime()
   public endedAt: DateTime
-
-
-  @hasMany(() => Stream, {
-    foreignKey: 'stream_id',
-  })
-  public stream: HasMany<typeof Stream>
-
-
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
 
 
   @manyToMany(() => Camera, {
@@ -38,10 +35,10 @@ export default class ServiceExecution extends BaseModel {
   })
   public cameras: ManyToMany<typeof Camera>
 
-  @belongsTo(() => Client, {
-    foreignKey: 'client_id'
+  @belongsTo(() => Execution, {
+    foreignKey: 'execution_id'
   })
-  public client: BelongsTo<typeof Client>
+  public Execution: BelongsTo<typeof Execution>
 
   @belongsTo(() => Room, {
     foreignKey: 'room_id'

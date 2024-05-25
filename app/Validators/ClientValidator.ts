@@ -10,7 +10,7 @@ export default class AdministratorValidator {
       rules.required()
     ]), // At least two letters
 
-    userId: schema.string([
+    user_id: schema.string([
       rules.exists({ table: 'users', column: 'id' }),  
       rules.required()
     ]), // Ensure id exists and is provided
