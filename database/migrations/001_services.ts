@@ -10,7 +10,6 @@ export default class extends BaseSchema {
       table.string('description') // description of the service
       table.boolean('status') // status of the service
       table.double('cost')//cost of the service
-      
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
@@ -18,9 +17,7 @@ export default class extends BaseSchema {
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
-  }
 
-  public async down () {
-    this.schema.dropTable(this.tableName)
+
   }
 }

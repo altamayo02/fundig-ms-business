@@ -9,14 +9,15 @@ export default class extends BaseSchema {
       table.boolean('status') //Estado de la suscrición
       table.dateTime('endAt') //Terminado en
       table.integer('paymentFrequency') //Frecuencia de pago
-      table.integer('plan_id').references('id').inTable('plans') //Referencia al plan
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
-    })
+    }).alterTable('subscriptions', (table) => {
+      table.integer('plan_id').references('id').inTable('plans').unsigned() //Referencia al plan
+      })
   }
 
   public async down () {

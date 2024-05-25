@@ -1,16 +1,17 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'transmissions'
+  protected tableName = 'chats'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.datetime('started_at')
-      table.datetime('ended_at')
-      table.integer('execution_id').references('executions.id').onDelete('CASCADE').unsigned()
-      table.integer('camera_id').references('cameras.id').onDelete('CASCADE').unsigned()
+      table.string('code').unique()
+      table.integer('client_id').references('id').inTable('clients').unsigned()
 
+      /**
+       * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
+       */
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

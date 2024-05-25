@@ -6,7 +6,6 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
 		table.increments('id')
-		table.integer('user_id')
 		table.string('cc')
 		table.string('department')
 		table.string('city')
@@ -14,14 +13,15 @@ export default class extends BaseSchema {
 		table.integer('phone_number')
 		
 		table.boolean('deceased') //fallecido
-		table.string('holder_id').references('clients.id') //Referencia al titular
-		//se hace referencia a la clave primaria de la tabla usuarios
-		table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE') // eliminar el token si el usuario es eliminado
 
 		
 		table.timestamp('created_at', { useTz: true })
 		table.timestamp('updated_at', { useTz: true })
-    })
+    }).alterTable('clients', (table)=>{
+		table.integer('holder_id').references('clients.id').unsigned() //Referencia al titular
+		//se hace referencia a la clave primaria de la tabla usuarios
+		table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE').unsigned() // eliminar el token si el usuario es eliminado
+	})
   }
 
   public async down () {
