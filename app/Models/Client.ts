@@ -16,7 +16,13 @@ export default class Client extends BaseModel {
   public user_id: number
 
   @column()
-  public cc: number
+  public name: string
+  
+  @column()
+  public lastName: string
+
+  @column()
+  public cc: string
 
   @column()
   public department: string
@@ -28,7 +34,7 @@ export default class Client extends BaseModel {
   public address: string
 
   @column()
-  public phoneNumber: number
+  public phoneNumber: string
 
   @column()
   public deceased: boolean

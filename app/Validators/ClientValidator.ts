@@ -5,43 +5,36 @@ export default class AdministratorValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    name: schema.string([
+    name: schema.string({}, [
       rules.minLength(2),
       rules.required()
     ]), // At least two letters
-
-    user_id: schema.string([
+  
+    user_id: schema.number([
       rules.exists({ table: 'users', column: 'id' }),  
       rules.required()
     ]), // Ensure id exists and is provided
-
-    lastName: schema.string([
+  
+    lastName: schema.string({}, [
       rules.minLength(2), 
       rules.required()
     ]), // At least 2 letters
-
-    email: schema.string([
-      rules.regex(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
-      rules.required(),
-    ]), // Must contain @, letters, a dot, and letters
-
-    city: schema.string([
-      rules.required(),
+  
+    city: schema.string({}, [
+      rules.required()
     ]),
-
-    address: schema.string([
-      rules.required(),
-      rules.regex(/^[a-zA-Z0-9\s,.-]+$/) // Adjusted regex to include spaces, commas, periods, and hyphens
-    ]), // Must contain letters, numbers, spaces, and common punctuation
-
-    cc: schema.number([
-      rules.required(),
+  
+    address: schema.string({}, [
+      rules.required()
+    ]), 
+  
+    cc: schema.string({}, [
+      rules.required()
     ]),
-
-    phoneNumber: schema.number([
-      rules.required
+  
+    phoneNumber: schema.string({}, [
+      rules.required()
     ])
-    
   })
 
   public messages: CustomMessages = {

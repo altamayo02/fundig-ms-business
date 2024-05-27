@@ -10,22 +10,6 @@ export default class User extends BaseModel {
   @column()
   public security_id: string
 
-  @column()
-  public cc: string
-
-  @column()
-  public department: string
-
-  @column()
-  public city: string
-
-  @column()
-  public address: string
-
-  @column()
-  public phoneNumber: string
-  
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

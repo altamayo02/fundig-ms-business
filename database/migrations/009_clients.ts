@@ -10,7 +10,9 @@ export default class extends BaseSchema {
 		table.string('department')
 		table.string('city')
 		table.string('address')
-		table.integer('phone_number')
+		table.string('phone_number')
+		table.string("name")
+		table.string("last_name")
 		
 		table.boolean('deceased') //fallecido
 

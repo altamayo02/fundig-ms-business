@@ -51,16 +51,14 @@ export default class ClientsController {
 		response.status(HttpStatusCode.BadRequest) */
 
         try {
-            const validatedData = await request.validate(ClientValidator)
-            const theClient: Client = await Client.create(validatedData)
-            return response.status(201).json({theClient})
-        } catch (error) {
-            if(error.messages){
-                return response.status(422).json({errors:error.messages})
-            }
-
-            return response.status(500).json({errors:error})
-        }
+            const validatedData = await request.validate(ClientValidator );
+          
+            const theClient = await Client.create(validatedData);
+            return response.status(201).json({ theClient });
+          } catch (error) {
+            console.error(error);
+            return response.status(400).json({ error: error.message });
+          }
     }
 
     /* public async update({ params, request }: HttpContextContract) {

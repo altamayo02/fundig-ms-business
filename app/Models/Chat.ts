@@ -1,10 +1,9 @@
-import { HasMany, hasMany, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
-import Service from './Service'
+import { HasMany, hasMany, belongsTo, column, BaseModel } from '@ioc:Adonis/Lucid/Orm'
 import Message from './Message'
 import Client from './Client'
 import { BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Chat extends Service {
+export default class Chat extends BaseModel {
 
   @column({ isPrimary: true })
   public id: number
