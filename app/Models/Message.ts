@@ -7,19 +7,20 @@ export default class Message extends BaseModel {
   public id: number
 
   @column()
-  public code: string
+  public content: string
 
   @column()
-  public content:string
-
-  @belongsTo(() => Chat, {
-    localKey:'code'
-  })
-  public chat: BelongsTo<typeof Chat>
-
+  public chat_id: number
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
-
+  
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+
+  @belongsTo(() => Chat, {
+    foreignKey: 'chat_id'
+  })
+  public chat: BelongsTo<typeof Chat>
 }

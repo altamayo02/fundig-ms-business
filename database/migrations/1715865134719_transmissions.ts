@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.datetime('started_at')
       table.datetime('ended_at')
-      table.integer('execution_id').references('executions.id').onDelete('CASCADE').unsigned()
+
       table.integer('camera_id').references('cameras.id').onDelete('CASCADE').unsigned()
 
       table.timestamp('created_at', { useTz: true })

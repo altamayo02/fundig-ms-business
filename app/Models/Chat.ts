@@ -1,27 +1,24 @@
-import { HasMany, hasMany, belongsTo, column, BaseModel } from '@ioc:Adonis/Lucid/Orm'
-import Message from './Message'
+import { belongsTo, column, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Client from './Client'
 import { BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import Message from './Message'
 
 export default class Chat extends BaseModel {
-
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public code : string
+  public access_code: string
 
   @column()
-  public client_id: number
+  public deceased_id: number
+
 
   @belongsTo(() => Client, {
-    foreignKey: 'client_id',
-    })
-    public client: BelongsTo<typeof Client>
-
-    
-  @hasMany(() => Message, {
-	foreignKey: 'chat_id'
+    foreignKey: 'deceased_id',
   })
+  public deceased: BelongsTo<typeof Client>
+    
+  @hasMany(() => Message)
   public messages: HasMany<typeof Message>
 }

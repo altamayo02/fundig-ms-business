@@ -16,16 +16,16 @@ export default class Payment extends BaseModel {
   public status: string
 
   @column.dateTime()
-  public dateTime: DateTime
+  public paidAt: DateTime
 
   @column()
-  public epaycoAdditionalInfo: number
+  public ePaycoMetaData: string
 
   @column()
   public method: string
 
   @column()
-  public subscriptions_id: number
+  public subscription_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -33,8 +33,9 @@ export default class Payment extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  
   @belongsTo(() => Subscription, {
-    foreignKey: 'subscriptions_id',
+    foreignKey: 'subscription_id',
   })
   public subscription: BelongsTo<typeof Subscription>
 }

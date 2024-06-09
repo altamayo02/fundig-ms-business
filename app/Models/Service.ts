@@ -1,7 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
-import ServiceExecution from 'App/Models/ServiceExecution'
-import ServicePlan from 'App/Models/PlanService'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Service extends BaseModel {
   @column({ isPrimary: true })
@@ -14,20 +12,14 @@ export default class Service extends BaseModel {
   public description: string
 
   @column()
-  public status: boolean
+  public cost: number
 
   @column()
-  public cost: number
+  public isOffered: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
-  @hasMany(() => ServiceExecution)
-  public serviceExecutions: HasMany<typeof ServiceExecution>
-
-  @hasMany(() => ServicePlan)
-  public servicePlans: HasMany<typeof ServicePlan>
 }

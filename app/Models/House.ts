@@ -1,11 +1,12 @@
 import { DateTime } from 'luxon'
-import { BaseModel, HasMany, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
-import Administrator from './Administrator'
-import Handler from './Handler'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class House extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+  
+  @column()
+  public country: string
   
   @column()
   public department: string
@@ -19,19 +20,16 @@ export default class House extends BaseModel {
   @column()
   public phone_number: number
 
-  @column()
-  public is_main_house: boolean
-
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Administrator)
+
+  /* @hasMany(() => Administrator)
   public administrators: HasMany<typeof Administrator>
 
   @hasMany(() => Handler)
-  public handlers: HasMany<typeof Handler>
+  public handlers: HasMany<typeof Handler> */
 }

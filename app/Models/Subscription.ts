@@ -8,14 +8,16 @@ export default class Subscription extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  /*
+    ACTIVE
+    SUSPENDED
+    CANCELLED
+  */
   @column()
-  public status: boolean
-
-  @column.dateTime()
-  public endAt: DateTime
+  public status: string
 
   @column()
-  public paymentFrequency: number
+  public paymentsStreak: number
 
   @column()
   public plan_id: number
@@ -29,6 +31,7 @@ export default class Subscription extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  
   @belongsTo(() => Client, {
     foreignKey: 'client_id'
   })
