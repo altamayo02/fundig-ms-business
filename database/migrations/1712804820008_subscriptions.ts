@@ -13,7 +13,10 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
     }).alterTable(this.tableName, (table) => {
       table.integer('plan_id').references('id').inTable('plans').unsigned()
-      table.integer('client_id').references('id').inTable('clients').unsigned()
+      table.integer('client_id')
+        .references('clients.id')
+        .onDelete('CASCADE')
+        .unsigned()
     })
   }
 

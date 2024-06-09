@@ -10,7 +10,10 @@ export default class extends BaseSchema {
       table.string('comment')
 
       table.integer('client_id').references('id').inTable('clients').unsigned()
-      table.integer('service_execution_id').references('id').inTable('service_executions').unsigned()
+      table.integer('service_execution_id')
+        .references('service_executions.id')
+        .onDelete('CASCADE')
+        .unsigned()
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

@@ -10,13 +10,16 @@ export default class extends BaseSchema {
       table.string('currency')
       table.string('status')
       table.dateTime('paid_at')
-      table.string('e_payco_meta_data')
+      table.string('e_payco_metadata')
       table.string('method')
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     }).alterTable(this.tableName, (table) => {
-      table.integer('subscription_id').references('id').inTable('subscriptions').onDelete('RESTRICT').unsigned() //Referencia a la suscripción
+      table.integer('subscription_id')
+        .references('subscriptions.id')
+        .onDelete('RESTRICT')
+        .unsigned()
     })
   }
 

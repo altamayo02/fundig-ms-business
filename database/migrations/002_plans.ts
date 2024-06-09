@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('description')
       table.float('cost')
       table.boolean('is_offered')
-      table.integer('amount_benefitted')
+      table.integer('amount_benefited')
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

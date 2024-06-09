@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Env from '@ioc:Adonis/Core/Env'
-import Transmission from "App/Models/Transmission"
+import Transmission from "App/Models/ServiceExecutions/Transmission"
 import axios, { HttpStatusCode } from 'axios'
 import ServiceExecution from 'App/Models/ServiceExecution'
 

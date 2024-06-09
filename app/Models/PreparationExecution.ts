@@ -1,27 +1,23 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, HasMany, belongsTo, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Handler from './Handler'
 import ServiceExecution from './ServiceExecution'
 
-export default class Review extends BaseModel {
+export default class PreparationExecution extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-
-  @column()
-  public rating: number
-
-  @column()
-  public comment: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-  
-  // Review stays, even after client is deleted
-  /* @belongsTo(() => Client)
-  public client: BelongsTo<typeof Client> */
+
   
   @belongsTo(() => ServiceExecution)
   public serviceExecution: BelongsTo<typeof ServiceExecution>
+
+  // FIXME - Many to many
+  @hasMany(() => Handler)
+  public handlers: HasMany<typeof Handler>
 }

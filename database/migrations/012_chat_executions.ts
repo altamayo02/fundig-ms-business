@@ -1,20 +1,19 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'service_executions'
+  protected tableName = 'chat_executions'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.datetime('started_at')
-      table.datetime('ended_at')
+      table.string('access_code').unique()
+      
+      table.integer('service_execution_id')
+        .references('service_executions.id')
+        .unsigned()
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
-    }).alterTable('service_executions', (table) => {
-      // If we don't care about the user, why would we care about
-      // nobody's service executions?
-      table.integer('service_id').references('services.id').onDelete('CASCADE').unsigned()
     })
   }
 

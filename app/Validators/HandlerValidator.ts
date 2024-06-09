@@ -35,8 +35,6 @@ export default class AdministratorValidator {
   public messages: CustomMessages = {
     'name.minLength': 'At least two letters',
     'name.required': 'Name is required',
-    'userId.exists': 'User ID must exist',
-    'userId.required': 'User ID is required',
     'lastName.minLength': 'At least 2 letters',
     'lastName.required': 'Last name is required',
     'email.regex': 'Email must be a valid email address',

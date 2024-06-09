@@ -9,7 +9,10 @@ export default class extends BaseSchema {
       table.string('name')
       table.string('rent_cost')
 
-      table.integer('house_id').references('id').inTable('houses').unsigned()
+      table.integer('house_id')
+        .references('houses.id')
+        .onDelete('CASCADE')
+        .unsigned()
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

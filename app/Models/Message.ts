@@ -1,16 +1,16 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
-import Chat from './Chat'
+import ChatExecution from './ChatExecution'
 
 export default class Message extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public content: string
+  public userSecurityId: string
 
   @column()
-  public chat_id: number
+  public content: string
   
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -19,8 +19,6 @@ export default class Message extends BaseModel {
   public updatedAt: DateTime
 
 
-  @belongsTo(() => Chat, {
-    foreignKey: 'chat_id'
-  })
-  public chat: BelongsTo<typeof Chat>
+  @belongsTo(() => ChatExecution)
+  public chatExecution: BelongsTo<typeof ChatExecution>
 }

@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, ManyToMany, column, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import Client from './Client'
 
 export default class Service extends BaseModel {
   @column({ isPrimary: true })
@@ -11,6 +12,7 @@ export default class Service extends BaseModel {
   @column()
   public description: string
 
+  // Cost at the very moment
   @column()
   public cost: number
 
@@ -22,4 +24,11 @@ export default class Service extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+
+  @manyToMany(() => Client, {
+    pivotTable: 'service_executions',
+    pivotRelatedForeignKey: 'deceased_id'
+  })
+  public clients: ManyToMany<typeof Client>
 }

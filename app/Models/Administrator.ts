@@ -1,7 +1,6 @@
 // app/Models/Administrator.ts
 
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
-import House from './House'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 
 export default class Administrator extends BaseModel {
@@ -36,18 +35,16 @@ export default class Administrator extends BaseModel {
   @column()
   public responsibilities: string
 
-  @column()
-  public house_id: number
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-
-  @belongsTo(() => House, {
+  
+  // https://stackoverflow.com/q/45389747
+  /* @belongsTo(() => House, {
     foreignKey: 'house_id'
   })
-  public house: BelongsTo<typeof House>
+  public house: BelongsTo<typeof House> */
 }
