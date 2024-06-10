@@ -11,10 +11,17 @@ export default class extends BaseSchema {
       table.string('department')
       table.string('city')
       table.string('postal_code')
-      table.unique([
+      // "Specified key was too long; max key length is 3072 bytes"
+      // locations_country_department_city_postal_code_unique is nowhere 3072B afaIk
+      /* table.unique([
         'country',
         'department',
         'city',
+        'postal_code'
+      ]) */
+      // I think this works anyway
+      table.unique([
+        'country',
         'postal_code'
       ])
 
