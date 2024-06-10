@@ -3,8 +3,8 @@
 import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import Plan from './Plan'
-import ServiceExecution from './ServiceExecution'
 import Review from './Review'
+import Location from './Location'
 
 export default class Client extends BaseModel {
   @column({ isPrimary: true })
@@ -22,15 +22,6 @@ export default class Client extends BaseModel {
   
   @column()
   public surnames: string
-
-  @column()
-  public country: string
-
-  @column()
-  public department: string
-
-  @column()
-  public city: string
 
   @column()
   public address: string
@@ -52,16 +43,20 @@ export default class Client extends BaseModel {
   @belongsTo(() => Client)
   public client: BelongsTo<typeof Client>
 
+  @belongsTo(() => Location)
+  public residenceLocation: BelongsTo<typeof Location>
+
   // Beneficiarios tienen un titular
   @hasMany(() => Client, {
 	  foreignKey: 'holder_id'
   })
   public clients: HasMany<typeof Client>
 
-  @hasMany(() => ServiceExecution, {
+  // FIXME - What for?
+  /* @hasMany(() => ServiceExecution, {
     foreignKey: 'deceased_id'
   })
-  public serviceExecutions: HasMany<typeof ServiceExecution>
+  public serviceExecutions: HasMany<typeof ServiceExecution> */
 
   @hasMany(() => Review, {
     foreignKey: 'reviewer_id'

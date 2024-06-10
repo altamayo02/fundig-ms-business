@@ -1,5 +1,6 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import Location from './Location'
 
 export default class Handler extends BaseModel {
   @column({ isPrimary: true })
@@ -19,12 +20,6 @@ export default class Handler extends BaseModel {
   public surnames: string
 
   @column()
-  public department: string
-
-  @column()
-  public city: string
-
-  @column()
   public address: string
 
   @column()
@@ -35,4 +30,7 @@ export default class Handler extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => Location)
+  public residenceLocation: BelongsTo<typeof Location>
 }

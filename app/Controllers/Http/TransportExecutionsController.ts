@@ -1,41 +1,42 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Camera from 'App/Models/Camera'
+
+import TransportExecution from "App/Models/TransportExecution"
 import { HttpStatusCode } from 'axios'
 
-export default class CamerasController {
+export default class TransportExecutionsController {
   public async find({ request, params }: HttpContextContract) {
     if (params.id) {
-      return await Camera.findOrFail(params.id)
+      return await TransportExecution.findOrFail(params.id)
     } else {
       const data = request.all()
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1)
         const perPage = request.input('per_page', 20)
-        return await Camera.query().paginate(page, perPage)
+        return await TransportExecution.query().paginate(page, perPage)
       } else {
-        return await Camera.query()
+        return await TransportExecution.query()
       }
     }
   }
 	
 	public async create({ request }: HttpContextContract) {
     const body = request.body()
-    const theCamera: Camera = await Camera.create(body)
-    return theCamera
+    const theChatExecution: TransportExecution = await TransportExecution.create(body)
+    return theChatExecution
   }
 
   public async update({ params, request }: HttpContextContract) {
-    const theCamera: Camera = await Camera.findOrFail(params.id)
+    const theChatExecution: TransportExecution = await TransportExecution.findOrFail(params.id)
     const body = request.body()
 
-    theCamera.height = body.height
-    theCamera.width = body.width
-    return await theCamera.save()
+    // TODO - Handle update
+
+    return await theChatExecution.save()
   }
 
   public async delete({ params, response }: HttpContextContract) {
-    const theCamera: Camera = await Camera.findOrFail(params.id)
+    const theChatExecution: TransportExecution = await TransportExecution.findOrFail(params.id)
     response.status(HttpStatusCode.NoContent)
-    return await theCamera.delete()
+    return await theChatExecution.delete()
   }
 }

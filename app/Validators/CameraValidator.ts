@@ -1,4 +1,4 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class CameraValidator {
@@ -23,7 +23,14 @@ export default class CameraValidator {
    *     ])
    *    ```
    */
-  public schema = schema.create({})
+  public schema = schema.create({
+    width: schema.number([
+      rules.range(256, Infinity)
+    ]),
+    height: schema.number([
+      rules.range(144, Infinity)
+    ])
+  })
 
   /**
    * Custom messages for validation failures. You can make use of dot notation `(.)`

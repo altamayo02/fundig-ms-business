@@ -15,6 +15,7 @@ export default class ChatExecution extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  
   // Chat execution and its messages stay,
   // even after service execution is deleted
   /* @belongsTo(() => ServiceExecution)

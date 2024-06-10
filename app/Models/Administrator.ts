@@ -1,7 +1,8 @@
 // app/Models/Administrator.ts
 
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import Location from './Location'
 
 export default class Administrator extends BaseModel {
   @column({ isPrimary: true })
@@ -19,12 +20,6 @@ export default class Administrator extends BaseModel {
   
   @column()
   public surnames: string
-
-  @column()
-  public department: string
-
-  @column()
-  public city: string
 
   @column()
   public address: string
@@ -47,4 +42,7 @@ export default class Administrator extends BaseModel {
     foreignKey: 'house_id'
   })
   public house: BelongsTo<typeof House> */
+
+  @belongsTo(() => Location)
+  public residenceLocation: BelongsTo<typeof Location>
 }

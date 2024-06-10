@@ -1,17 +1,22 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'transmission_executions'
+  protected tableName = 'locations'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.integer('service_execution_id')
-        .references('service_executions.id')
-        .onDelete('CASCADE')
-        .unsigned()
-      // TODO - Transmissions x Handlers
+      table.string('country')
+      table.string('department')
+      table.string('city')
+      table.string('postal_code')
+      table.unique([
+        'country',
+        'department',
+        'city',
+        'postal_code'
+      ])
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

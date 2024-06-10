@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'preparation_executions'
+  protected tableName = 'stream_executions'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
@@ -11,7 +11,6 @@ export default class extends BaseSchema {
         .references('service_executions.id')
         .onDelete('CASCADE')
         .unsigned()
-      // TODO - Preparations x Handlers
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

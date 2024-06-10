@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, HasMany, ManyToMany, belongsTo, column, hasMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, ManyToMany, belongsTo, column, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import ServiceExecution from './ServiceExecution'
 import Camera from './Camera'
-import Handler from './Handler'
+import Room from './Room'
 
-export default class TransmissionExecution extends BaseModel {
+export default class StreamExecution extends BaseModel {
   @column({ isPrimary: true })
   public id: number 
   
@@ -18,12 +18,11 @@ export default class TransmissionExecution extends BaseModel {
   @belongsTo(() => ServiceExecution)
   public serviceExecution: BelongsTo<typeof ServiceExecution>
 
-  // FIXME - Many to many
-  @hasMany(() => Handler)
-  public handlers: HasMany<typeof Handler>
+  @belongsTo(() => Room)
+  public room: BelongsTo<typeof Room>
 
   @manyToMany(() => Camera, {
-    pivotTable: 'broadcasts',
+    pivotTable: 'transmissions',
   })
   cameras: ManyToMany<typeof Camera>
 }

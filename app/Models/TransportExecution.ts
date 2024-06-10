@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, HasMany, belongsTo, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
-import Handler from './Handler'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import Location from './Location'
 import ServiceExecution from './ServiceExecution'
 
-export default class PreparationExecution extends BaseModel {
+export default class TransportExecution extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -12,12 +12,14 @@ export default class PreparationExecution extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
   
+
   @belongsTo(() => ServiceExecution)
   public serviceExecution: BelongsTo<typeof ServiceExecution>
 
-  // FIXME - Many to many
-  @hasMany(() => Handler)
-  public handlers: HasMany<typeof Handler>
+  @belongsTo(() => Location)
+  public from: BelongsTo<typeof Location>
+
+  @belongsTo(() => Location)
+  public to: BelongsTo<typeof Location>
 }

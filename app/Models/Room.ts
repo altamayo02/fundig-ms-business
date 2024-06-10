@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import House from 'App/Models/House'
-import ServiceExecution from './ServiceExecution'
 
 export default class Room extends BaseModel {
   @column({ isPrimary: true })
@@ -22,7 +21,4 @@ export default class Room extends BaseModel {
   
   @belongsTo(() => House)
   public house: BelongsTo<typeof House>
-
-  @hasMany(() => ServiceExecution)
-  public serviceExecutions: HasMany<typeof ServiceExecution>
 }
