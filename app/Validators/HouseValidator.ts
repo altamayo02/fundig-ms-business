@@ -1,4 +1,4 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class HouseValidator {
@@ -23,18 +23,37 @@ export default class HouseValidator {
    *     ])
    *    ```
    */
-  public schema = schema.create({})
+  public schema = schema.create({
 
-  /**
-   * Custom messages for validation failures. You can make use of dot notation `(.)`
-   * for targeting nested fields and array expressions `(*)` for targeting all
-   * children of an array. For example:
-   *
-   * {
-   *   'profile.username.required': 'Username is required',
-   *   'scores.*.number': 'Define scores as valid numbers'
-   * }
-   *
-   */
-  public messages: CustomMessages = {}
+    // At least two letters
+
+    // The house's address
+    address: schema.string({}, [
+      rules.minLength(2), 
+      rules.required()
+    ]), 
+
+    // The house's city
+    city: schema.string({}, [
+      rules.required()
+    ]),
+    
+     department: schema.string({}, [
+      rules.required()
+    ]),
+    phoneNumber: schema.string({}, [
+      rules.minLength(10), 
+      rules.required()
+    ])
+
+  })
+
+  public messages: CustomMessages = {
+    'address.minLength': 'The address must be at least two characters long',
+    'address.required': 'The address is required',
+    'city.required': 'The city is required',
+    'department.required': 'The department is required',
+    'phoneNumber.minLength': 'The phone number must be at least 10 characters long',
+    'phoneNumber.required': 'The phone number is required'
+  }
 }

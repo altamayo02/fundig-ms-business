@@ -3,38 +3,25 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class RoomValidator {
   constructor(protected ctx: HttpContextContract) {}
+  public schema = schema.create({
 
-  /*
-   * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
-   *
-   * For example:
-   * 1. The username must be of data type string. But then also, it should
-   *    not contain special characters or numbers.
-   *    ```
-   *     schema.string([ rules.alpha() ])
-   *    ```
-   *
-   * 2. The email must be of data type string, formatted as a valid
-   *    email. But also, not used by any other user.
-   *    ```
-   *     schema.string([
-   *       rules.email(),
-   *       rules.unique({ table: 'users', column: 'email' }),
-   *     ])
-   *    ```
-   */
-  public schema = schema.create({})
+    // The room's price
+    price: schema.number(),
 
-  /**
-   * Custom messages for validation failures. You can make use of dot notation `(.)`
-   * for targeting nested fields and array expressions `(*)` for targeting all
-   * children of an array. For example:
-   *
-   * {
-   *   'profile.username.required': 'Username is required',
-   *   'scores.*.number': 'Define scores as valid numbers'
-   * }
-   *
-   */
-  public messages: CustomMessages = {}
+    // The room's id  
+    id: schema.number(),
+
+    // The room's name
+    name: schema.string(),
+
+    // The room's gouse id
+    house_id: schema.number(),
+  })
+
+  public messages: CustomMessages = {
+    'price.required': 'The price is required',
+    'id.required': 'The id is required',
+    'name.required': 'The name is required',
+    'house_id.required': 'The house_id is required',
+  }
 }

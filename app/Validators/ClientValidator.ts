@@ -18,8 +18,12 @@ export default class AdministratorValidator {
     lastName: schema.string({}, [
       rules.minLength(2), 
       rules.required()
-    ]), // At least 2 letters
-  
+    ]),
+
+    department: schema.string({}, [
+      rules.required()
+    ]),
+
     city: schema.string({}, [
       rules.required()
     ]),
@@ -33,6 +37,10 @@ export default class AdministratorValidator {
     ]),
   
     phoneNumber: schema.string({}, [
+      rules.required()
+    ]),
+    
+     deceased: schema.boolean([
       rules.required()
     ])
   })
