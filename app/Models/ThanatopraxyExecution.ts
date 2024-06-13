@@ -1,27 +1,25 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import ServiceExecution from './ServiceExecution'
+import Location from './Location'
 
-export default class Review extends BaseModel {
+export default class ThanatopraxyExecution extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public rating: number
-
-  @column()
-  public comment: string
+  public embalmed: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-  
-  // Review stays, even after client is deleted
-  /* @belongsTo(() => Client)
-  public client: BelongsTo<typeof Client> */
+
   
   @belongsTo(() => ServiceExecution)
   public serviceExecution: BelongsTo<typeof ServiceExecution>
+
+  @belongsTo(() => Location)
+  public location: BelongsTo<typeof Location>
 }

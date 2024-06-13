@@ -1,52 +1,48 @@
 // app/Models/Administrator.ts
 
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
-import House from './House'
-import User from './User'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import Location from './Location'
 
 export default class Administrator extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  // MongoDB reference pulled from MS-Security
   @column()
-  public user_id: number
+  public security_id: string
 
   @column()
-  public cc: number
-
+  public cc: string
+    
   @column()
-  public department: string
-
+  public names: string
+  
   @column()
-  public city: string
+  public surnames: string
 
   @column()
   public address: string
 
   @column()
-  public phoneNumber: number
+  public phoneNumber: string
 
   @column()
   public responsibilities: string
-
-  @column()
-  public house_id: number
-
-  @belongsTo(() => House, {
-    foreignKey:'house_id'
-  })
-  public house: BelongsTo<typeof House>
-
-  @belongsTo(() => User, {
-    foreignKey:'user_id'
-  })
-  public user: BelongsTo<typeof User>
-
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  
+  // https://stackoverflow.com/q/45389747
+  /* @belongsTo(() => House, {
+    foreignKey: 'house_id'
+  })
+  public house: BelongsTo<typeof House> */
+
+  @belongsTo(() => Location)
+  public residenceLocation: BelongsTo<typeof Location>
 }

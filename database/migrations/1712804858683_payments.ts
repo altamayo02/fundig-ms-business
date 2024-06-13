@@ -6,20 +6,20 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.double('amount') //Valor del pago
-      table.string('currency') //Moneda del pago
-      table.string('status') //Estado de epayco
-      table.dateTime('dateTime') //Fecha y hora
-      table.integer('epaycoAdditionalInfo') //Información adicional de epayco
-      table.string('method') //Metodo usado
+      table.float('amount')
+      table.string('currency')
+      table.string('status')
+      table.dateTime('paid_at')
+      table.string('e_payco_metadata')
+      table.string('method')
 
-      /**
-       * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
-       */
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
-    }).alterTable('payments', (table)=>{
-      table.integer('subscriptions_id').references('id').inTable('subscriptions').onDelete('RESTRICT').unsigned() //Referencia a la suscripción
+    }).alterTable(this.tableName, (table) => {
+      table.integer('subscription_id')
+        .references('subscriptions.id')
+        .onDelete('RESTRICT')
+        .unsigned()
     })
   }
 

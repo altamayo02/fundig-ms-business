@@ -9,7 +9,6 @@ export default class extends BaseSchema {
       table.integer('width').unsigned().notNullable().checkBetween([0, 100])
       table.integer('height').unsigned().notNullable().checkBetween([0, 100])
 
-
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

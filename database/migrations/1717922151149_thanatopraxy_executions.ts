@@ -1,21 +1,18 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'plan_services'
+  protected tableName = 'thanatopraxy_executions'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
+      table.boolean('embalmed')
 
-      table.integer('plan_id')
-        .references('plans.id')
+      table.integer('service_execution_id')
+        .references('service_executions.id')
         .onDelete('CASCADE')
         .unsigned()
-      table.integer('service_id')
-        .references('services.id')
-        .unsigned()
-      table.unique(['plan_id', 'service_id'])
-	  
+
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

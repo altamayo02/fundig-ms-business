@@ -10,10 +10,10 @@ export default class AdministratorValidator {
       rules.required()
     ]), // At least two letters
   
-    user_id: schema.number([
+    /* user_id: schema.number([
       rules.exists({ table: 'users', column: 'id' }),  
       rules.required()
-    ]), // Ensure id exists and is provided
+    ]), // Ensure id exists and is provided */
   
     lastName: schema.string({}, [
       rules.minLength(2), 
@@ -48,8 +48,6 @@ export default class AdministratorValidator {
   public messages: CustomMessages = {
     'name.minLength': 'At least two letters',
     'name.required': 'Name is required',
-    'userId.exists': 'User ID must exist',
-    'userId.required': 'User ID is required',
     'lastName.minLength': 'At least 2 letters',
     'lastName.required': 'Last name is required',
     'email.regex': 'Email must be a valid email address',

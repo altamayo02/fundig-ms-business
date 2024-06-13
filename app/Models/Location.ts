@@ -1,14 +1,21 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-// FIXME - UNUSED
-export default class User extends BaseModel {
+export default class Location extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  // MongoDB reference pulled from MS-Security
   @column()
-  public security_id: string
+  public country: string
+
+  @column()
+  public department: string
+
+  @column()
+  public city: string
+
+  @column()
+  public postalCode: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

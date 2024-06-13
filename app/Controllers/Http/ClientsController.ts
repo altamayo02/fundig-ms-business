@@ -100,4 +100,6 @@ export default class ClientsController {
         response.status(204)
         return await theClient.delete()
     }
+
+    // TODO - Delegate holder status
 }

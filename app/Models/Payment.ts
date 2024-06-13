@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
-import Subscription from 'App/Models/Subscription'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Payment extends BaseModel {
   @column({ isPrimary: true })
@@ -16,25 +15,17 @@ export default class Payment extends BaseModel {
   public status: string
 
   @column.dateTime()
-  public dateTime: DateTime
+  public paidAt: DateTime
 
   @column()
-  public epaycoAdditionalInfo: number
+  public ePaycoMetadata: string
 
   @column()
   public method: string
-
-  @column()
-  public subscriptions_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
-  @belongsTo(() => Subscription, {
-    foreignKey: 'subscriptions_id',
-  })
-  public subscription: BelongsTo<typeof Subscription>
 }

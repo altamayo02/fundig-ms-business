@@ -1,34 +1,27 @@
 // app/Models/Client.ts
 
 import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
-import ServiceExecution from './ServiceExecution'
-import Subscription from './Subscription'
 import { DateTime } from 'luxon'
-import User from './User'
-import Service from './Service'
 import Plan from './Plan'
+import Review from './Review'
+import Location from './Location'
 
 export default class Client extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-
-  @column()
-  public user_id: number
-
-  @column()
-  public name: string
   
+  // MongoDB reference pulled from MS-Security
   @column()
-  public lastName: string
+  public security_id: string
 
   @column()
   public cc: string
-
+  
   @column()
-  public department: string
-
+  public names: string
+  
   @column()
-  public city: string
+  public surnames: string
 
   @column()
   public address: string
@@ -39,46 +32,41 @@ export default class Client extends BaseModel {
   @column()
   public deceased: boolean
 
-  @column()
-  public holder_id: boolean
-
-
-  @hasMany(() => Client, {
-	foreignKey: 'beneficiary_id'
-  })
-  public clients: HasMany<typeof Client>
-
-  // ID Titular
-  @belongsTo(() => Client, {
-	foreignKey: 'holder_id',
-  })
-  public client: BelongsTo<typeof Client>
-
-  @manyToMany(() => Service, {
-	pivotTable: 'service_executions',
-	pivotForeignKey: 'client_id',
-	pivotRelatedForeignKey: 'service_id'
-  })
-  public services: ManyToMany<typeof Service>
-  
-  @manyToMany(() => Plan, {
-	pivotTable: 'subscriptions',
-	pivotForeignKey: 'client_id',
-	pivotRelatedForeignKey: 'plan_id'
-  })
-  public plans: ManyToMany<typeof Plan>
-
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => User, {
-    foreignKey: 'user_id',
+
+  // Titular tiene beneficiarios
+  @belongsTo(() => Client)
+  public client: BelongsTo<typeof Client>
+
+  @belongsTo(() => Location)
+  public residenceLocation: BelongsTo<typeof Location>
+
+  // Beneficiarios tienen un titular
+  @hasMany(() => Client, {
+	  foreignKey: 'holder_id'
   })
-  public user: BelongsTo<typeof User>
+  public clients: HasMany<typeof Client>
+
+  // FIXME - What for?
+  /* @hasMany(() => ServiceExecution, {
+    foreignKey: 'deceased_id'
+  })
+  public serviceExecutions: HasMany<typeof ServiceExecution> */
+
+  @hasMany(() => Review, {
+    foreignKey: 'reviewer_id'
+  })
+  public reviews: HasMany<typeof Review>
   
-  
+  @manyToMany(() => Plan, {
+    pivotTable: 'subscriptions',
+    /* pivotForeignKey: 'client_id',
+    pivotRelatedForeignKey: 'plan_id' */
+  })
+  public plans: ManyToMany<typeof Plan>
 }

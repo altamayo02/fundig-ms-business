@@ -1,25 +1,20 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo, manyToMany, ManyToMany, HasOne, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
-import Room from 'App/Models/Room'
-import Camera from './Camera'
+import { BaseModel, BelongsTo, HasMany, belongsTo, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Review from './Review'
 import Client from './Client'
-import { hasOne } from '@ioc:Adonis/Lucid/Orm'
 import Service from './Service'
-import Execution from './Execution'
 
 export default class ServiceExecution extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  // Cost at the moment of the execution
+  // ? - Maybe just leave that to Payments?
   @column()
-public execution_id: number
+  public cost: number
 
-@column()
-public room_id: number
-
-@column()
-public service_id: number
-
+  @column()
+  public note: string
 
   @column.dateTime()
   public startedAt: DateTime
@@ -27,26 +22,19 @@ public service_id: number
   @column.dateTime()
   public endedAt: DateTime
 
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
 
-  @manyToMany(() => Camera, {
-    pivotTable: 'transmissions',
-    pivotForeignKey: 'service_execution_id',
-    pivotRelatedForeignKey: 'camera_id'
-  })
-  public cameras: ManyToMany<typeof Camera>
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime
 
-  @belongsTo(() => Execution, {
-    foreignKey: 'execution_id'
-  })
-  public Execution: BelongsTo<typeof Execution>
 
-  @belongsTo(() => Room, {
-    foreignKey: 'room_id'
-  })
-  public room: BelongsTo<typeof Room>
+  @belongsTo(() => Client)
+  public deceased: BelongsTo<typeof Client>
 
-  @belongsTo(() => Service, {
-    foreignKey: 'service_id'
-  })
+  @belongsTo(() => Service)
   public service: BelongsTo<typeof Service>
+
+  @hasMany(() => Review)
+  public reviews: HasMany<typeof Review>
 }

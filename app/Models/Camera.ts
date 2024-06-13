@@ -10,7 +10,6 @@ export default class Camera extends BaseModel {
 
   @column()
   public height: number
-  
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
